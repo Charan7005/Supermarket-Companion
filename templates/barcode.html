@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarket Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='barcode.css') }}"> 
+    <!-- <link rel="stylesheet" href="fcss2.css"> -->
+
+    <style>
+        /* Your custom styles here */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="" class="logo" style="color: aliceblue"><i class="fas fa-shopping-basket"></i> Supermarket Companion</a>
+        <nav class="navbar">
+            <a href="/first">home</a>
+            <a href="/third">Search</a>
+            <a href="/fifth">scan</a>
+            <a href="/fourth">AI Chef</a>
+            <a href="/second">Sign Up</a>
+          <a href="new.html">Features</a>
+        </nav>
+        <div class="icons">
+          <div class="fas fa-bars" id="menu-btn"></div>
+          <div class="fas fa-search" id="search-btn"></div>
+          <div class="fas fa-shopping-cart" id="cart-btn"></div>
+          <div class="fas fa-user" id="login-btn"></div>
+        </div>
+        <form action="" class="search-form">
+          <input type="text" id="search-box" placeholder="search here..." />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+        <form action="" class="login-form">
+          <h3>Login Now</h3>
+          <input type="email" placeholder="your email" class="box" />
+          <input type="password" placeholder="your password" class="box" />
+          <p>forget your password <a href="#">click here</a></p>
+          <p>don't have an account <a href="#">create now</a></p>
+          <input type="submit" value="login now" class="btn" />
+        </form>
+      </header>
+    <main id="main-content">
+        <!-- Scan Section -->
+        <section id="scan-section">
+            <h2>Scan Products</h2>
+            <button id="start-scan-btn">Start Scanning</button>
+            <div id="product-details"></div>
+            <button id="add-to-cart-btn" style="display: none;">Add to Cart</button>
+        </section>
+
+     <!-- Cart Section -->
+     <section id="cart-section">
+        <h2>Cart</h2>
+        <div id="cart-items"></div>
+        <p id="total-price"></p> <!-- Display total price -->
+        <button id="checkout-btn">Checkout</button>
+    </section>
+
+
+       
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
+    <script>
+        
+        
+$(document).ready(function() {
+
+$('#start-scan-btn').click(function() {
+    startBarcodeScanner();
+});
+
+});
+
+function startBarcodeScanner() {
+Quagga.init({
+    inputStream: {
+        name: "Live",
+        type: "LiveStream",
+        target: document.querySelector('#main-content'),
+        constraints: {
+            width: 640,
+            height: 480,
+            facingMode: "environment" // or "user" for front camera
+        }
+    },
+    decoder: {
+        readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader", "2of5_reader", "code_93_reader"] // specify multiple barcode formats to scan
+    }
+}, function(err) {
+    if (err) {
+        console.error('Error initializing Quagga:', err);
+        alert('Error initializing barcode scanner');
+        return;
+    }
+    Quagga.start();
+});
+
+Quagga.onDetected(function(result) {
+    console.log('Barcode detected:', result.codeResult.code);
+    alert('Barcode detected: ' + result.codeResult.code);
+    sendBarcodeToServer(result.codeResult.code);
+    Quagga.stop();
+});
+}
+
+function sendBarcodeToServer(barcodeData) {
+$.ajax({
+    type: 'POST',
+    url: '/scan_barcode',
+    contentType: 'application/json',
+    data: JSON.stringify({ barcode: barcodeData }),
+    success: function(response) {
+        console.log('Server response:', response);
+        if (response.status === 'success') {
+            var productName = response.product_name;
+            var price = response.price;
+            var quantity=response.quantity;
+    $('#product-details').text('Product Name: ' + response.product_name + '\n'+'\nPrice:' + response.price+ '\n'+'\nQuantity:' + response.quantity+'g');
+            $('#add-to-cart-btn').show();
+            $('#add-to-cart-btn').data('product-id', response.product_id);
+            $('#add-to-cart-btn').data('product_name', productName);
+            $('#add-to-cart-btn').data('price', price);
+            $('#add-to-cart-btn').data('quantity', quantity);
+            //addToCart(productName, price, quantity);
+            
+            checkout(response.product_name, response.price,response.quantity);
+            $('#cart-items').append('<p>' + productName + ' - ₹' + price + quantity +'g'+'</p>');
+
+            
+        } 
+        
+        
+        else {
+            $('#product-details').text('Product not found for barcode: ' + barcodeData);
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error('Error sending barcode data to server:', error);
+    }
+});
+} 
+
+
+$(document).ready(function() {
+$('#add-to-cart-btn').click(function() {
+var productName = $(this).data('product_name');
+var price = $(this).data('price');
+var quantity=$(this).data('quantity')
+addToCart(productName, price ,quantity); // Call addToCart() when "Add to Cart" button is clicked
+});
+
+$('#checkout-btn').click(function() {
+calculateTotalPrice(); // Call checkout() when "Checkout" button is clicked
+});
+});
+
+function calculateTotalPrice() {
+    var totalPrice = 0;
+
+    // Iterate over each scanned item and sum up the prices
+    $('#cart-items p').each(function() {
+            var priceString = $(this).text().split('₹')[1]; // Extract the price part from the text
+            var price = parseFloat(priceString); // Convert the price to a float
+            totalPrice += price; // Add the price to the total
+        });
+    
+
+
+    $('#scanned-items p').each(function() {
+        var priceString = $(this).text().split('₹')[1]; // Extract the price part from the text
+        var price = parseFloat(priceString); // Convert the price to a float
+        totalPrice += price; // Add the price to the total
+    });
+
+    // Display the total price
+    $('#total-price').text('Total Price: ₹' + totalPrice.toFixed(2)); // Display the total price with 2 decimal places
+
+    //alert('Total Price: $' + totalPrice.toFixed(2)); // Display the total price with 2 decimal places
+}
+
+function addToCart(productName, price,quantity) {
+$.ajax({
+type: 'POST',
+url: '/add_to_cart',
+contentType: 'application/json',
+data: JSON.stringify({ product_name: productName, price: price, quantity: quantity }),
+success: function(response) {
+console.log('Add to Cart Response:', response); // Log the response to check for correctness
+//alert('Item added to cart!');
+
+var productName = response.product_name;
+var price = response.price;
+var quantity = response.quantity
+
+var itemHTML = '<p>Product Name: ' + productName + ', Price: ₹' + price + ', Quantity: ' + quantity + '</p>';
+        $('#cart-items').append(itemHTML);
+        $('#cart-items-section').show(); // Show the cart items section if it's hidden
+        //alert('Item added to cart!');
+
+
+// Display the scanned item
+//var itemHTML = '<p>Product Name: ' + productName + ', Price: $' + price + '</p>'+ ', quantity: ' + quantity + 'g'+'</p>';
+//$('#scanned-items').append(itemHTML);
+
+// Show the cart items section
+//$('#cart-items-section').show();
+
+//var totalPriceHTML = '<p>Total Price: $' + totalPrice.toFixed(2) + '</p>';
+        //$('#cart-total-price').html(totalPriceHTML);
+
+//$('#cart-items-price').show();
+},
+error: function(xhr, status, error) {
+console.error('Error adding item to cart:', error);
+}
+});
+}
+
+
+
+$(document).ready(function() {
+            $('#search-btn').click(function() {
+                searchProduct();
+            });
+
+            $('#add-to-cart-search-btn').click(function() {
+                var productName = $(this).data('product_name');
+                var price = $(this).data('price');
+                var quantity = $(this).data('quantity');
+                addToCart(productName, price, quantity); // Call addToCart() when "Add to Cart" button is clicked
+            });
+        });
+
+
+function searchProduct() {
+    var query = $('#search-input').val().trim();
+    if (query !== '') {
+        $.ajax({
+            type: 'GET',
+            url: '/search',
+            data: { q: query },
+            success: function(response) {
+                displaySearchResults(response);
+                // Show the "Add to Cart" button when search results are displayed
+                $('#add-to-cart-search-btn').show();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error searching for product:', error);
+            }
+        });
+    }
+}
+
+function displaySearchResults(results) {
+    var searchResultsContainer = $('#search-results');
+    searchResultsContainer.empty();
+
+    if (results.length > 0) {
+        var resultList = '<ul>';
+        results.forEach(function(result) {
+            resultList += '<li>' + result.product_name + ' - ₹' + result.price + ' <button class="add-to-cart-search-btn" data-product_name="' + result.product_name + '" data-price="' + result.price + '" data-quantity="' + result.quantity + '">Add to Cart</button></li>';
+        });
+        resultList += '</ul>';
+        searchResultsContainer.html(resultList);
+    } else {
+        searchResultsContainer.html('<p>No results found.</p>');
+    }
+
+    // Bind click event to dynamically added "Add to Cart" buttons
+    $('.add-to-cart-search-btn').click(function() {
+        var productName = $(this).data('product_name');
+        var price = $(this).data('price');
+        var quantity = $(this).data('quantity');
+        addToCart(productName, price, quantity); // Call addToCart() when "Add to Cart" button is clicked
+    });
+}
+
+
+
+
+
+
+function sendMessage() {
+var userInput = document.getElementById('user-input').value;
+appendMessage('You: ' + userInput, 'user-message');
+document.getElementById('user-input').value = '';
+
+fetch('/get_response', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ user_input: userInput }),
+})
+.then(response => response.json())
+.then(data => {
+    appendMessage('Bot: ' + data.response, 'bot-message');
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+}
+
+function appendMessage(message, className) {
+var chatBox = document.getElementById('chat-box');
+var p = document.createElement('p');
+p.textContent = message;
+p.classList.add('message', className);
+chatBox.appendChild(p);
+}
+
+$(document).ready(function() {
+    $('#checkout-btn').click(function() {
+        window.location.href = '/checkout'; // Redirect to the checkout page
+    });
+});
+
+
+    </script>
+</body>
+</html>

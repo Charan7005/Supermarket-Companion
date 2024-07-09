@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;900&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-signup.css') }}">
+</head>
+<body>
+    <div class="wrap-content">
+        <aside class="board-sign">
+            <div class="account-block">
+                <h2>ALREADY HAVE AN ACCOUNT?</h2>
+                <a href="index.html">LOG IN</a>
+            </div>
+            <div class="svg-block">
+                <img src="static/images/one.jpeg" alt="Example Image">
+
+            </div>
+        </aside>
+        <div class="signup_block">
+            <div class="container">
+                <img src="static/images/one.jpeg" alt="Logo">
+                <div class="title-wrap">
+                    <h1 class="title">CREATE YOUR ACCOUNT</h1>
+                </div>
+                <form class="signup-form">
+                    <fieldset>
+                        <legend>Personal Information</legend>
+                        <p class="form-info">Please fill in all fields below</p>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="input" placeholder="Username" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="input" placeholder="example@gmail.com" required>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="input" required>
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" class="input" required>
+                        <label for="allergies">Allergies</label>
+                        <input type="text" id="allergies" class="input" placeholder="Any allergies?">
+                        <label for="food-preference">Food Preference</label>
+                        <select id="food-preference" class="select">
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="gluten-free">Gluten-Free</option>
+                            <option value="dairy-free">Dairy-Free</option>
+                            <option value="nut-free">Nut-Free</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </fieldset>
+                    <input type="submit" value="Sign Up" class="btn">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('.signup-form');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get form values
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const confirmPassword = document.getElementById('confirm-password').value.trim();
+        const allergies = document.getElementById('allergies').value.trim();
+        const foodPreference = document.getElementById('food-preference').value;
+
+        // Validate form values
+        if (!username || !email || !password || !confirmPassword) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert('Passwords do not match.');
+          return;
+        }
+
+        // If everything is valid, you can proceed with form submission
+        const formData = {
+          username: username,
+          email: email,
+          password: password,
+          allergies: allergies,
+          foodPreference: foodPreference,
+        };
+
+        console.log('Form Data:', formData);
+
+        // Optionally, you can send the data to a server using fetch or XMLHttpRequest
+        /*
+        fetch('/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          alert('Sign up successful!');
+          window.location.href = 'home.html'; // Redirect to home page
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Sign up failed.');
+        });
+        */
+
+        // For demonstration, we are directly redirecting to the home page after validation
+        alert('Sign up successful!');
+        window.location.href = '/first'; // Redirect to home page
+      });
+    });
+    </script>
+</body>
+</html>

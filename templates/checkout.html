@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Supermarket Companion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='checkout.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <a href="" class="logo"><i class="fas fa-shopping-basket"></i> Supermarket Companion</a>
+        <nav class="navbar">
+            <a href="/first">home</a>
+            <a href="/third">Search</a>
+            <a href="/fifth">scan</a>
+            <a href="/fourth">AI Chef</a>
+            <a href="/second">Sign Up</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Total Price: ${{ bill.total_price }}</h2>
+        <section id="checkout-section">
+            <h2>Checkout</h2>
+            <div id="cart-items"></div>
+            <p id="total-price"></p>
+            <div class="payment-options">
+                <button id="cash-btn">Cash</button>
+                <button id="qr-btn">Scan QR</button>
+            </div>
+            <div id="cash-frame" class="payment-frame">
+                <h3>Cash Payment</h3>
+                <p>Please proceed to the cashier for payment.</p>
+                <button id="confirm-cash-btn">Confirm Cash Payment</button>
+            </div>
+            <div id="qr-frame" class="payment-frame" style="display: none;">
+                <h3>QR Code Payment</h3>
+                <p>Scan the QR code below with your mobile camera:</p>
+                <img src="static/qr.png" alt="QR Code">
+                <button id="confirm-qr-btn">Confirm QR Payment</button>
+            </div>
+        </section>
+    </main>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch cart items and total price on page load
+            fetch('/checkout')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch cart items.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const { cart_items, total_price } = data.bill;
+
+                    // Display cart items and total price on the checkout page
+                    const cartItemsElement = $('#cart-items');
+                    const totalPriceElement = $('#total-price');
+
+                    cartItemsElement.empty();  // Clear existing items
+
+                    // Iterate through cart items and append to DOM
+                    cart_items.forEach(item => {
+                        // Ensure item.price is a number before formatting
+                        const formattedPrice = parseFloat(item.price).toFixed(2);
+                        cartItemsElement.append(`<p>Product Name: ${item.product_name}, Price: ₹${formattedPrice}, Quantity: ${item.quantity}</p>`);
+                    });
+
+                    // Display total price
+                    totalPriceElement.text(`Total Price: ₹${total_price.toFixed(2)}`);
+                })
+                .catch(error => {
+                    console.error('Error fetching cart items:', error);
+                });
+
+            // Handle payment option buttons
+            $('#cash-btn').click(function() {
+                $('#cash-frame').show();
+                $('#qr-frame').hide();
+            });
+
+            $('#qr-btn').click(function() {
+                $('#cash-frame').hide();
+                $('#qr-frame').show();
+            });
+        });
+
+        function updateCartDisplay(productName, price, quantity) {
+            var existingItem = $('#cart-items').find(`p:contains(${productName})`);
+
+            if (existingItem.length > 0) {
+                var currentQuantity = parseInt(existingItem.text().match(/Quantity: (\d+)/)[1]);
+                var currentPrice = parseFloat(existingItem.text().match(/Price: ₹(\d+(\.\d+)?)/)[1]);
+                var newQuantity = currentQuantity + quantity;
+                var newPrice = currentPrice + (price * quantity);
+
+                existingItem.text(`Product Name: ${productName}, Price: ₹${newPrice.toFixed(2)}, Quantity: ${newQuantity}`);
+            } else {
+                var itemHTML = `<p>Product Name: ${productName}, Price: ₹${(price * quantity).toFixed(2)}, Quantity: ${quantity}</p>`;
+                $('#cart-items').append(itemHTML);
+            }
+        }
+    </script>
+</body>
+</html>

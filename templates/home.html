@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supermarket Companion</title>
+    <link rel="icon" href="images/grocy.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <!-- <link rel="stylesheet" href="home2.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head> 
+  <body>
+    <header class="header">
+      <a href="" class="logo"><i class="fas fa-shopping-basket"></i> Supermarket Companion</a>
+
+      <nav class="navbar">
+        <a href="/first">home</a>
+        <a href="/third">Search</a>
+        <a href="/fifth">scan</a>
+        <a href="/fourth">AI Chef</a>
+        <a href="/second">Sign Up</a>
+        <a href="/seven">Sign Up</a>
+      </nav>
+      <div class="icons">
+        <div class="fas fa-bars" id="menu-btn"></div>
+        <div class="fas fa-search" id="search-btn"></div>
+        
+        <a href="/six">
+          <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        </a>
+        <div class="fas fa-user" id="login-btn"></div>
+      </div>
+      <form action="" class="search-form">
+        <input type="text" id="search-box" placeholder="search here..." />
+        <label for="search-box" class="fas fa-search"></label>
+      </form>
+      <div class="shopping-cart">
+        <div class="box">
+          <i class="fas fa-trash"></i>
+          <img src="images/watermelon.png" alt="" />
+          <div class="content">
+            <h3>watermelon</h3>
+            <span class="pice">$4.99-</span>
+            <span class="quantity">qty:1</span>
+          </div>
+        </div>
+        <div class="box">
+          <i class="fas fa-trash"></i>
+          <img src="images/onion.png" alt="" />
+          <div class="content">
+            <h3>onion</h3>
+            <span class="pice">$4.99-</span>
+            <span class="quantity">qty:1</span>
+          </div>
+        </div>
+        <div class="box">
+          <i class="fas fa-trash"></i>
+          <img src="images/chicken.png" alt="" />
+          <div class="content">
+            <h3>chicken</h3>
+            <span class="pice">$4.99-</span>
+            <span class="quantity">qty:1</span>
+          </div>
+        </div>
+        <div class="total">total: $19.69/-</div>
+        <a href="#" class="btn">check out</a>
+      </div>
+      <form action="" class="login-form">
+        <h3>Login Now</h3>
+        <input type="email" placeholder="your email" class="box" />
+        <input type="password" placeholder="your password" class="box" />
+        <p>forget your password <a href="#">click here</a></p>
+        <p>don't have an account <a href="#">create now</a></p>
+        <input type="submit" value="login now" class="btn" />
+      </form>
+    </header>
+    <section class="home" id="home">
+      <div class="content">
+        <h3>fresh and <span>organic </span>Products for your</h3>
+        <p>
+          Shop at our one stop grocery website for a wide selection of
+          high-quality fruits, vegetables, dairy, meat, and pantry items. Use our amazing features to locate the nearest supermarket, 
+          Use our AI chef to get recipes and ingredients for your favorite dishes.
+           Start today!
+        </p>
+        <a href="#" class="btn">shop now</a>
+      </div>
+    </section>
+    <section class="features" id="features">
+      <h1 class="heading">our <span>features</span></h1>
+      <div class="box-container">
+        <div class="box">
+          <img src="{{ url_for('static', filename='feature-1.png') }}" alt="" style="width: 33rem" />
+          <h3>fresh and organic</h3>
+          <p>
+              We provide highly organic and fresh products,from our 
+              highly trusted supermakets
+          </p>
+          <a href="#" class="btn">read more</a>
+        </div>
+        <div class="box">
+          <img src="{{ url_for('static', filename='istockphoto-1452604857-612x612.jpg') }}" alt="" style="width: 29rem" />
+          <h3>AI Helper</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim ea
+            praesentium architecto mollitia sint velit nostrum ipsum,
+            voluptatibus deleniti, accusamus deserunt hic neque. Sed temporibus,
+            numquam ullam hic ipsam quaerat.
+          </p>
+          <a href="#" class="btn">read more</a>
+        </div>
+        <div class="box">
+          <img src="{{ url_for('static', filename='download.jpeg') }}" alt="" style="width: 37rem" />
+          <h3>Geo location</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim ea
+            praesentium architecto mollitia sint velit nostrum ipsum,
+            voluptatibus deleniti, accusamus deserunt hic neque. Sed temporibus,
+            numquam ullam hic ipsam quaerat.
+          </p>
+          <a href="#" class="btn">read more</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="products">
+      <h1 class="heading">our <span>products</span></h1>
+      <div class="swiper product-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide box">
+            <img src="{{ url_for('static', filename='products-1.png') }}" alt="" />
+            <h3>fresh orange - Dmart</h3>
+
+            <div class="price">₹4.99-₹10.00/-</div>
+            <a href="#" class="btn">add to cart</a>
+          </div>
+
+          <div class="swiper-slide box">
+            <img src="{{ url_for('static', filename='products-2.png') }}" alt="" />
+            <h3>fresh onion - Lulu Hypermarket</h3>   
+            <div class="price">₹14.99-₹20.00/-</div>
+            <a href="#" class="btn">add to cart</a>
+          </div>
+
+          <div class="swiper-slide box">
+            <img src="{{ url_for('static', filename='products-3.png') }}" alt="" />
+            <h3>fresh meat - D-mart</h3>
+
+            <div class="price">₹4.99-₹10.00/-</div>
+            <a href="#" class="btn">add to cart</a>
+          </div>
+
+          <div class="swiper-slide box">
+            <img src="{{ url_for('static', filename='products-4.png') }}" alt="" />
+            <h3>fresh cabbage -Lulu Hypermarket</h3>
+
+            <div class="price">₹4.99-₹10.00/-</div>
+            <a href="#" class="btn">add to cart</a>
+          </div>
+        </div>
+
+        <div class="swiper product-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide box">
+              <img src="{{ url_for('static', filename='products-5.png') }}" alt="" />
+              <h3>fresh potato - Walmart</h3>
+
+              <div class="price">₹4.99-₹10.00/-</div>
+              <a href="#" class="btn">add to cart</a>
+            </div>
+
+            <div class="swiper-slide box">
+              <img src="{{ url_for('static', filename='products-6.png') }}" alt="" />
+              <h3>fresh avocado - Ajfaan</h3>
+
+              <div class="price">₹4.99-₹10.00/-</div>
+              <a href="#" class="btn">add to cart</a>
+            </div>
+
+            <div class="swiper-slide box">
+              <img src="{{ url_for('static', filename='products-7.png') }}" alt="" />
+              <h3>fresh carrot - Dmart</h3>
+
+              <div class="price">₹4.99-₹10.00/-</div>
+              <a href="#" class="btn">add to cart</a>
+            </div>
+
+            <div class="swiper-slide box">
+              <img src="{{ url_for('static', filename='products-8.png') }}" alt="" />
+              <h3>green lemon - Lulu Hypermarket</h3>
+
+              <div class="price">₹4.99-₹10.00/-</div>
+              <a href="#" class="btn">add to cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="categories" id="categories">
+      <h1 class="heading">product <span>categories</span></h1>
+      <div class="box-container">
+        <div class="box">
+          <img
+            src="{{ url_for('static', filename='cat-1.png') }}"
+            alt=""
+            style="width: 30rem; padding-top: 6rem"
+          />
+          <h3>vegetables</h3>
+          <p>upto 45% off</p>
+          <a href="#" class="btn">shop now</a>
+        </div>
+        <div class="box">
+          <img src="{{ url_for('static', filename='cat-2.png') }}" alt="" style="width: 30rem" />
+          <h3>fresh fruits</h3>
+          <p>upto 45% off</p>
+          <a href="#" class="btn">shop now</a>
+        </div>
+        <div class="box">
+          <img
+            src="{{ url_for('static', filename='cat-3.png') }}"
+            alt=""
+            style="width: 30rem; padding-top: 2.5rem"
+          />
+          <h3>dairy products</h3>
+          <p>upto 45% off</p>
+          <a href="#" class="btn">shop now</a>
+        </div>
+        <div class="box">
+          <img
+            src="{{ url_for('static', filename='cat-4.png') }}"
+            alt=""
+            style="width: 30rem; padding-top: 8.5rem"
+          />
+          <h3>fresh meat</h3>
+          <p>upto 45% off</p>
+          <a href="#" class="btn">shop now</a>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
+    <script src="script.js"></script>
+    <script>
+      $(document).ready(function() {
+
+$('#start-scan-btn').click(function() {
+    startBarcodeScanner();
+});
+
+});
+
+function startBarcodeScanner() {
+Quagga.init({
+    inputStream: {
+        name: "Live",
+        type: "LiveStream",
+        target: document.querySelector('#main-content'),
+        constraints: {
+            width: 640,
+            height: 480,
+            facingMode: "environment" // or "user" for front camera
+        }
+    },
+    decoder: {
+        readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader", "2of5_reader", "code_93_reader"] // specify multiple barcode formats to scan
+    }
+}, function(err) {
+    if (err) {
+        console.error('Error initializing Quagga:', err);
+        alert('Error initializing barcode scanner');
+        return;
+    }
+    Quagga.start();
+});
+
+Quagga.onDetected(function(result) {
+    console.log('Barcode detected:', result.codeResult.code);
+    alert('Barcode detected: ' + result.codeResult.code);
+    sendBarcodeToServer(result.codeResult.code);
+    Quagga.stop();
+});
+}
+
+function sendBarcodeToServer(barcodeData) {
+$.ajax({
+    type: 'POST',
+    url: '/scan_barcode',
+    contentType: 'application/json',
+    data: JSON.stringify({ barcode: barcodeData }),
+    success: function(response) {
+        console.log('Server response:', response);
+        if (response.status === 'success') {
+            var productName = response.product_name;
+            var price = response.price;
+            var quantity=response.quantity;
+    $('#product-details').text('Product Name: ' + response.product_name + '\n'+'\nPrice:' + response.price+ '\n'+'\nQuantity:' + response.quantity+'g');
+            $('#add-to-cart-btn').show();
+            $('#add-to-cart-btn').data('product-id', response.product_id);
+            $('#add-to-cart-btn').data('product_name', productName);
+            $('#add-to-cart-btn').data('price', price);
+            $('#add-to-cart-btn').data('quantity', quantity);
+            //addToCart(productName, price, quantity);
+            
+            checkout(response.product_name, response.price,response.quantity);
+            $('#cart-items').append('<p>' + productName + ' - $' + price + quantity +'g'+'</p>');
+
+            
+        } 
+        
+        
+        else {
+            $('#product-details').text('Product not found for barcode: ' + barcodeData);
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error('Error sending barcode data to server:', error);
+    }
+});
+}
+
+    
+
+
+
+
+$(document).ready(function() {
+$('#add-to-cart-btn').click(function() {
+var productName = $(this).data('product_name');
+var price = $(this).data('price');
+var quantity=$(this).data('quantity')
+addToCart(productName, price ,quantity); // Call addToCart() when "Add to Cart" button is clicked
+});
+
+$('#checkout-btn').click(function() {
+checkout(); // Call checkout() when "Checkout" button is clicked
+});
+});
+
+function addToCart(productName, price,quantity) {
+$.ajax({
+type: 'POST',
+url: '/add_to_cart',
+contentType: 'application/json',
+data: JSON.stringify({ product_name: productName, price: price, quantity: quantity }),
+success: function(response) {
+console.log('Add to Cart Response:', response); // Log the response to check for correctness
+alert('Item added to cart!');
+
+var productName = response.product_name;
+var price = response.price;
+var quantity = response.quantity
+// Display the scanned item
+var itemHTML = '<p>Product Name: ' + productName + ', Price: $' + price + '</p>'+ ', quantity: ' + quantity + 'g'+'</p>';
+$('#scanned-items').append(itemHTML);
+
+// Show the cart items section
+$('#cart-items-section').show();
+},
+error: function(xhr, status, error) {
+console.error('Error adding item to cart:', error);
+}
+});
+}
+
+
+
+
+
+
+
+$(document).ready(function() {
+$('#search-btn').click(function() {
+searchProduct();
+});
+});
+
+function searchProduct() {
+var query = $('#search-input').val().trim();
+if (query !== '') {
+$.ajax({
+type: 'GET',
+url: '/search',
+data: { q: query },
+success: function(response) {
+    displaySearchResults(response);
+},
+error: function(xhr, status, error) {
+    console.error('Error searching for product:', error);
+}
+});
+}
+}
+
+function displaySearchResults(results) {
+var searchResultsContainer = $('#search-results');
+searchResultsContainer.empty();
+
+if (results.length > 0) {
+var resultList = '<ul>';
+results.forEach(function(result) {
+resultList += '<li>' + result.product_name + ' - $' + result.price + '</li>';
+});
+resultList += '</ul>';
+searchResultsContainer.html(resultList);
+} else {
+searchResultsContainer.html('<p>No results found.</p>');
+}
+}
+
+
+function sendMessage() {
+var userInput = document.getElementById('user-input').value;
+appendMessage('You: ' + userInput, 'user-message');
+document.getElementById('user-input').value = '';
+
+fetch('/get_response', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ user_input: userInput }),
+})
+.then(response => response.json())
+.then(data => {
+    appendMessage('Bot: ' + data.response, 'bot-message');
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+}
+
+function appendMessage(message, className) {
+var chatBox = document.getElementById('chat-box');
+var p = document.createElement('p');
+p.textContent = message;
+p.classList.add('message', className);
+chatBox.appendChild(p);
+}
+
+
+let searchForm=document.querySelector('.search-form');
+document.querySelector('#search-btn').onclick=()=>{
+    searchForm.classList.toggle('active');
+    Menu.classList.remove('active');
+    ShoppingCart.classList.remove('active');
+    Login.classList.remove('active');
+}
+let ShoppingCart=document.querySelector('.shopping-cart');
+document.querySelector('#cart-btn').onclick=()=>{
+    ShoppingCart.classList.toggle('active');
+    Menu.classList.remove('active');
+    searchForm.classList.remove('active');
+    Login.classList.remove('active');
+}
+let Login=document.querySelector('.login-form');
+document.querySelector('#login-btn').onclick=()=>{
+    Login.classList.toggle('active');
+    Menu.classList.remove('active');
+    searchForm.classList.remove('active');
+    ShoppingCart.classList.remove('active');
+}
+let Menu=document.querySelector('.navbar');
+document.querySelector('#menu-btn').onclick=()=>{
+    Menu.classList.toggle('active');
+    searchForm.classList.remove('active');
+    ShoppingCart.classList.remove('active');
+    Login.classList.remove('active');
+}
+window.onscroll=()=>{
+    Menu.classList.remove('active');
+    searchForm.classList.remove('active');
+    ShoppingCart.classList.remove('active');
+    Login.classList.remove('active');
+}
+
+
+var swiper = new Swiper(".product-slider", {
+  loop:true,
+  spaceBetween: 20,
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+
+    },
+    750: {
+      slidesPerView: 2,
+    },
+    1024: {
+      slidesPerView: 3,
+    },
+  },
+});
+
+
+</script>
+
+
+    <script src="script.js"></script>
+    <i class="fas fa-robot ai-icon"></i>
+  </body>
+</html>

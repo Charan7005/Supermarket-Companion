@@ -1,0 +1,143 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    background-image: url('fbg.jpg');
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Header Styles */
+  header {
+    background-color: #414244; /* Lighter Blue */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Main Content Styles */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background-color: #414244;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Section Styles */
+  section {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for sections */
+  }
+  
+  section h2 {
+    margin-bottom: 10px;
+    color: #414244; /* Lighter Blue for Headings */
+  }
+  
+  /* Layout Variations for Scan and Search Sections */
+  #scan-section, #search-section {
+    background-color: #ddd;
+  }
+  
+  /* Layout Variation for Cart Section */
+  #cart-section {
+    background-color: #ddd;
+    border-left: 1px solid #ddd; /* Divider between sections */
+  }
+  
+  /* Chat Section Layout */
+  #chat-section {
+    background-color: #eaeaea;
+    border-left: 1px solid #ddd; /* Divider between sections */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #414244; /* Green for chat send button */
+    color: #fff
+}
+  
+  .primary-btn {
+    background-color: #414244; /* Green */
+  }
+  
+  .primary-btn:hover {
+    background-color: #414244; /* Darker Green */
+  }
+  
+  .secondary-btn {
+    background-color: #414244;
+    color: #000;
+  }
+  
+  .secondary-btn:hover {
+    background-color: #414244;
+  }
+  
+  /* Input Styles */
+  input[type="text"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #414244;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Text Styles */
+  .message {
+    margin-bottom: 10px;
+  }
+  
+  .user-message {
+    color: blue;
+  }
+  
+  .bot-message {
+    color: green;
+  }
+  
+  /* Chat Container Styles */
+  .chat-container {
+    border: none; /* Removed border for cleaner chat window */
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    flex-grow: 1; /* Chat container expands to fill remaining space */
+  }
+  
+  .chat-container input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+    border: 1px solid #414244; /* Added border for input field */
+    border-radius: 5px;
+    padding: 7px 10px; /* Adjust padding for better fit */
+  }
+  
+  .chat-container button {
+    width: auto;
+    background-color: #414244; /* Green for chat send button */
+    color: #fff
+  }

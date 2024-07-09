@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+:root {
+  --orange: #ff7800;
+  --black: #130f40;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --border: 0.2rem solid rgba(0, 0, 0, 0.1);
+  --outline: 0.1rem solid rgba(0, 0, 0, 0.1);
+  --outline-hover: 0.2rem solid var(--black);
+  --gray: #ccc;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
+body {
+  background: #f9f9f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+section {
+  padding: 2rem 9%;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: var(--black);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 9%;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+}
+
+header .logo {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+header .navbar a {
+  font-size: 1.6rem;
+  color: white;
+  margin-left: 2rem;
+}
+
+header .icons div {
+  font-size: 2rem;
+  color: white;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+header .icons .fas {
+  transition: color 0.3s;
+}
+
+header .icons .fas:hover {
+  color: var(--orange);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+#checkout-section {
+  margin-top: 8rem;
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  text-align: center;
+}
+
+#checkout-section h2 {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: var(--black);
+}
+
+#cart-items {
+  margin-bottom: 2rem;
+}
+
+#cart-items p {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+#total-price {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: var(--orange);
+}
+
+.payment-options {
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.payment-options button {
+  margin-right: 1.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.payment-options button:hover {
+  background-color: #ff9b52;
+}
+
+.payment-frame {
+  display: none;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.payment-frame h3 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.payment-frame p {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  margin-bottom: 1rem;
+}
+
+.payment-frame button {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.payment-frame button:hover {
+  background-color: #ff9b52;
+}
+
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+
+  header {
+    flex-direction: column;
+  }
+
+  header .navbar {
+    margin-top: 1rem;
+  }
+
+  header .navbar a {
+    display: block;
+    margin: 1rem 0;
+  }
+
+  section {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 50%;
+  }
+
+  header .logo {
+    font-size: 2rem;
+  }
+
+  header .navbar a {
+    font-size: 1.4rem;
+  }
+
+  button {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 45%;
+  }
+
+  header .logo {
+    font-size: 1.8rem;
+  }
+
+  header .navbar a {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+:root {
+  --primary-color: #2c3e50; /* Dark blue */
+  --secondary-color: #e74c3c; /* Red */
+  --light-color: #ecf0f1; /* Light gray */
+  --background-color: #34495e; /* Medium blue */
+  --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+  --border: 0.2rem solid rgba(255, 255, 255, 0.1);
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.3s ease-in-out;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
+body {
+  background: var(--background-color);
+  color: var(--light-color);
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ebedee, #c8710d);
+}
+
+.signup-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  width: 35rem;
+  max-width: 90%;
+}
+
+.signup-form h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  color: var(--secondary-color);
+}
+
+.form-group {
+  margin-bottom: 2.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--secondary-color);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.4rem;
+  border: var(--border);
+  border-radius: 0.5rem;
+  background: #f9f9f9;
+  transition: background 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  background: #fff;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.7rem;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+
+button[type="submit"]:hover {
+  background:whitesmoke;
+}
+
+/* Header Styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 9%;
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  transition: background 0.3s;
+}
+
+.header .logo {
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: var(--secondary-color);
+}
+
+.header .logo i {
+  color: var(--primary-color);
+}
+
+.header .navbar a {
+  font-size: 2rem;
+  margin: 0 1.5rem;
+  color: var(--secondary-color);
+  position: relative;
+}
+
+.header .navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s;
+}
+
+.header .navbar a:hover::after {
+  width: 100%;
+}
+
+.header .icons div {
+  height: 5rem;
+  width: 5rem;
+  line-height: 5rem;
+  border-radius: 50%;
+  background: #eee;
+  color: var(--secondary-color);
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  text-align: center;
+  transition: background 0.3s, color 0.3s;
+}
+
+.header .icons div:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+#menu-btn {
+  display: none;
+}
+
+.header .search-form,
+.header .shopping-cart,
+.header .login-form {
+  position: absolute;
+  top: 110%;
+  right: -150%;
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  transition: right 0.4s;
+}
+
+.header .search-form.active,
+.header .shopping-cart.active,
+.header .login-form.active {
+  right: 2rem;
+}
+
+.header .search-form input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: var(--border);
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.header .search-form label {
+  font-size: 2.2rem;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.header .shopping-cart,
+.header .login-form {
+  width: 35rem;
+}
+
+.header .shopping-cart .box,
+.header .login-form .box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: var(--border);
+}
+
+.header .shopping-cart .box img,
+.header .login-form img {
+  height: 8rem;
+  margin-right: 1rem;
+}
+
+.header .shopping-cart .box .content,
+.header .login-form .content {
+  width: 70%;
+}
+
+.header .shopping-cart .box .fa-trash {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--light-color);
+  transition: color 0.3s;
+}
+
+.header .shopping-cart .box .fa-trash:hover {
+  color: var(--primary-color);
+}
+
+.header .shopping-cart .total {
+  font-size: 2.2rem;
+  color: var(--secondary-color);
+}
+
+.header .shopping-cart .btn {
+  margin-top: 1rem;
+}
+
+.header .login-form h3 {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+}
+
+.header .login-form p {
+  font-size: 1.4rem;
+}

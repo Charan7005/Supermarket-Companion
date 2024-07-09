@@ -1,0 +1,17 @@
+{
+    "Email_Send": "",
+    "Email_Receive": "",
+    "Email_Password": "",
+    "url": 0,
+    "ALERT": false,
+    "Threshold": 10,
+    "Thread": false,
+    "Log": false,
+    "Scheduler": false,
+    "Timer": false,
+    "prototxt": "D:/vs code/BarcodeBilling/BarcodeBilling/project1/models/deploy.prototxt",
+    "model": "D:/vs code/BarcodeBilling/BarcodeBilling/project1/models/res10_300x300_ssd_iter_140000.caffemodel",
+    "confidence": 0.4,
+    "skip_frames": 30
+   
+}

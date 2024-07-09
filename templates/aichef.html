@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarket Companion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='aicss.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Your custom styles here */
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+    <header>
+        <a href="" class="logo" style="color: aliceblue"><i class="fas fa-shopping-basket"></i> Supermarket Companion</a>
+      
+            <nav class="navbar">
+                <a href="/first">home</a>
+                <a href="/third">Search</a>
+                <a href="/fifth">scan</a>
+                <a href="/fourth">AI Chef</a>
+                <a href="/second">Sign Up</a>   
+              <a href="new.html">Features</a>
+            </nav>
+            <div class="icons">
+              <div class="fas fa-bars" id="menu-btn"></div>
+              <div class="fas fa-search" id="search-btn"></div>
+              <div class="fas fa-shopping-cart" id="cart-btn"></div>
+              <div class="fas fa-user" id="login-btn"></div>
+            </div>
+    </header>
+    <main id="main-content">
+        <!-- Chat Section -->
+        <section id="chat-section">
+            <h2>Live Chat</h2>
+            <div class="chat-container">
+                <div id="chat-box"></div>
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+            <div id="ingredients-results"></div> <!-- To display ingredients -->
+        </section>
+    </main>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('user-input').value;
+            appendMessage('You: ' + userInput, 'user-message');
+            document.getElementById('user-input').value = '';
+
+            fetch('/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_input: userInput }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                appendMessage('Bot: ' + data.response, 'bot-message');
+                checkIngredients(data.response); // Check ingredients after receiving bot response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function appendMessage(message, className) {
+            var chatBox = document.getElementById('chat-box');
+            var p = document.createElement('p');
+            p.textContent = message;
+            p.classList.add('message', className);
+            chatBox.appendChild(p);
+        }
+
+        function checkIngredients(botResponse) {
+            // Extracting ingredients from the bot response (assuming it's a comma-separated list)
+            //var ingredients = botResponse.split('*').map(ingredient => ingredient.trim()); // Simple split by comma and trim spaces
+            var ingredients = botResponse.split(/[*-]/).map(ingredient => ingredient.trim());
+
+            fetch('/check_ingredients', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ingredients: ingredients }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayIngredients(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function displayIngredients(data) {
+            const ingredientsResults = document.getElementById('ingredients-results');
+            ingredientsResults.innerHTML = '';  // Clear previous results
+
+            data.forEach(item => {
+                const itemBox = document.createElement('div');
+                itemBox.classList.add('ingredients');
+
+                itemBox.innerHTML = `
+                    <p>Product ID: ${item.product_id}</p>
+                    <p>Food Type ID: ${item.foodtype_id}</p>
+                    <p>Product Name: ${item.product_name}</p>
+                    <p>Quantity: ${item.quantity}</p>
+                    <p>Price: ${item.price}</p>
+                    <p>Restock Level: ${item.restock_level}</p>
+                    <p>Lactose Intolerant: ${item.lactose_intolerant ? 'Yes' : 'No'}</p>
+                    <p>Vegan: ${item.vegan ? 'Yes' : 'No'}</p>
+                    <p>Nut Allergic: ${item.nut_allergic ? 'Yes' : 'No'}</p>
+                    <p>Supermarket Name: ${item.supermarket_name}</p>
+                    <button onclick="addToCart('${item.product_name}', ${item.price}, ${item.quantity})">Add to Cart</button>
+                `;
+
+                ingredientsResults.appendChild(itemBox);
+            });
+        }
+
+        function addToCart(productName, price, quantity) {
+            fetch('/add_to_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ product_name: productName, price: price, quantity: quantity }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

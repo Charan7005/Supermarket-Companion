@@ -1,0 +1,302 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+:root {
+  --orange: #ff7800;
+  --black: #130f40;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --border: 0.2rem solid rgba(0, 0, 0, 0.1);
+  --outline: 0.1rem solid rgba(0, 0, 0, 0.1);
+  --outline-hover: 0.2rem solid var(--black);
+  --gray: #ccc;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
+body {
+  background: #f9f9f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+section {
+  padding: 2rem 9%;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: var(--black);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 9%;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+}
+
+header .logo {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+header .navbar a {
+  font-size: 1.6rem;
+  color: white;
+  margin-left: 2rem;
+}
+
+header .icons div {
+  font-size: 2rem;
+  color: white;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+header .icons .fas {
+  transition: color 0.3s;
+}
+
+header .icons .fas:hover {
+  color: var(--orange);
+}
+
+.search-form {
+  display: none;
+}
+
+.search-form input {
+  font-size: 1.6rem;
+  padding: 1rem;
+  width: 30rem;
+  border: var(--outline);
+}
+
+.search-form label {
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.box {
+  background: white;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: var(--box-shadow);
+  border: var(--border);
+  border-radius: 5px;
+  width: 90%;
+  max-width: 800px;
+}
+
+#search-section {
+  text-align: left;
+}
+
+#search-section {
+  margin-top: 5rem;
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  text-align: center;
+}
+
+#search-section h2 {
+  margin-bottom: 2rem;
+  font-size: 2.8rem; /* Increase the font size */
+  color: var(--black);
+}
+
+#search-input {
+  width: calc(100% - 40px);
+  max-width: 600px;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: var(--outline);
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#search-btn {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#search-btn:hover {
+  background-color: #ff9b52;
+}
+
+#search-results {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+#search-results ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#search-results ul li {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+.add-to-cart-search-btn {
+  padding: 5px 10px;
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1.2rem;
+}
+
+.add-to-cart-search-btn:hover {
+  background-color: #ff9b52;
+}
+
+#cart-section {
+  text-align: left;
+}
+
+#cart-section h2 {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: var(--black);
+}
+
+#cart-items {
+  margin-bottom: 2rem;
+}
+
+#cart-items p {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+#total-price {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: var(--orange);
+}
+
+#checkout-btn {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#checkout-btn:hover {
+  background-color: #ff9b52;
+}
+
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+
+  header {
+    flex-direction: column;
+  }
+
+  header .navbar {
+    margin-top: 1rem;
+  }
+
+  header .navbar a {
+    display: block;
+    margin: 1rem 0;
+  }
+
+  section {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 50%;
+  }
+
+  header .logo {
+    font-size: 2rem;
+  }
+
+  header .navbar a {
+    font-size: 1.4rem;
+  }
+
+  button {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 45%;
+  }
+
+  header .logo {
+    font-size: 1.8rem;
+  }
+
+  header .navbar a {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+  }
+}

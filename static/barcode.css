@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+:root {
+  --orange: #ff7800;
+  --black: #130f40;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --border: 0.2rem solid rgba(0, 0, 0, 0.1);
+  --outline: 0.1rem solid rgba(0, 0, 0, 0.1);
+  --outline-hover: 0.2rem solid var(--black);
+  --gray: #ccc;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
+body {
+  background: #f9f9f9;
+  color: #333;
+}
+
+section {
+  padding: 2rem 9%;
+}
+
+header {
+  background: var(--black);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 9%;
+  box-shadow: var(--box-shadow);
+}
+
+header .logo {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+header .navbar a {
+  font-size: 1.6rem;
+  color: white;
+  margin-left: 2rem;
+}
+
+header .icons div {
+  font-size: 2rem;
+  color: white;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+header .icons .fas {
+  transition: color 0.3s;
+}
+
+header .icons .fas:hover {
+  color: var(--orange);
+}
+
+.search-form,
+.login-form {
+  display: none;
+}
+
+.search-form input {
+  font-size: 1.6rem;
+  padding: 1rem;
+  width: 30rem;
+  border: var(--outline);
+}
+
+.search-form label {
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.login-form {
+  background: white;
+  padding: 2rem;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  position: absolute;
+  top: 10rem;
+  right: 2rem;
+  width: 30rem;
+  z-index: 1000;
+}
+
+.login-form h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+
+.login-form .box {
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: var(--outline);
+}
+
+.login-form .btn {
+  background: var(--orange);
+  color: white;
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.login-form .btn:hover {
+  background: var(--black);
+}
+
+#product-details,
+#cart-items {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: white;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  font-size: 1.8rem;
+}
+
+#total-price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+button {
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  border: none;
+  background: var(--orange);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: var(--black);
+  transform: translateY(-2px);
+}
+
+.ai-icon {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 3rem;
+  color: var(--orange);
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+
+  header {
+    flex-direction: column;
+  }
+
+  header .navbar {
+    margin-top: 1rem;
+  }
+
+  header .navbar a {
+    display: block;
+    margin: 1rem 0;
+  }
+
+  section {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 50%;
+  }
+
+  header .logo {
+    font-size: 2rem;
+  }
+
+  header .navbar a {
+    font-size: 1.4rem;
+  }
+
+  button {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 45%;
+  }
+
+  header .logo {
+    font-size: 1.8rem;
+  }
+
+  header .navbar a {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+  }
+}

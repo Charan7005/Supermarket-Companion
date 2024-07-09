@@ -1,0 +1,238 @@
+/* Import Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+/* Variables */
+:root {
+  --orange: #ff7800;
+  --black: #130f40;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --border: 0.2rem solid rgba(0, 0, 0, 0.1);
+  --outline: 0.1rem solid rgba(0, 0, 0, 0.1);
+  --outline-hover: 0.2rem solid var(--black);
+}
+
+/* Global Styles */
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 10rem; /* Adjust padding to match the height of the header */
+}
+
+/* Wrapper to Center Content */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem; /* Adjusted padding */
+}
+
+/* Header Styles */
+header {
+  background-color: var(--black);
+  color: #fff;
+  padding: 2rem;
+  width: 100%;
+  box-shadow: var(--box-shadow);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Align items vertically */
+}
+
+header .logo {
+  color: aliceblue;
+  text-decoration: none;
+  font-size: 2rem; /* Adjust the logo size */
+  display: flex;
+  align-items: center;
+}
+
+header .logo i {
+  margin-right: 0.5rem; /* Adjust the spacing between the icon and text */
+}
+
+header nav {
+  display: flex;
+}
+
+header nav a {
+  color: #fff;
+  margin-right: 2rem; /* Adjust the spacing between nav items */
+  font-size: 1.6rem; /* Adjust the font size of nav items */
+}
+
+header nav a:hover {
+  color: var(--orange);
+}
+
+header .icons {
+  display: flex;
+  align-items: center;
+}
+
+header .icons .fas {
+  color: #fff;
+  font-size: 2rem; /* Adjust the size of icon */
+  margin-right: 1rem; /* Adjust the spacing between icons */
+}
+
+/* Search Form Styles */
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem; /* Adjusted margin */
+}
+
+.search-form input[type="text"] {
+  padding: 1.2rem 1.5rem; /* Adjusted padding */
+  font-size: 2rem; /* Adjusted font size */
+  border: var(--border);
+  border-radius: 5px; /* Adjusted border radius */
+  margin-right: 1rem;
+  width: 400px; /* Adjusted width */
+}
+
+.search-form label {
+  color: #fff;
+  cursor: pointer;
+  font-size: 2rem; /* Adjusted font size */
+}
+
+/* Main Content Styles */
+main {
+  width: 100%;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+}
+
+/* Section Styles */
+section {
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+}
+
+section h2 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem; /* Increased font size */
+  color: var(--black);
+}
+
+/* Specific Section Styles */
+#chat-section {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  margin-top: 2rem;
+}
+
+/* Response Styles */
+.response {
+  font-size: 2.8rem; /* Increased font size */
+}
+
+/* Button Styles */
+button {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  background-color: var(--black);
+  color: #fff;
+  border: none;
+}
+
+button:hover {
+  background-color: var(--orange);
+}
+
+.primary-btn {
+  background-color: var(--black);
+}
+
+.primary-btn:hover {
+  background-color: var(--orange);
+}
+
+.secondary-btn {
+  background-color: var(--orange);
+  color: #fff;
+}
+
+.secondary-btn:hover {
+  background-color: var(--black);
+}
+
+/* Input Styles */
+input[type="text"] {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  border: var(--border);
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+/* Text Styles */
+.message {
+  margin-bottom: 3rem;
+  font-size: medium; /* Added missing value */
+}
+
+/* Ingredient Box Styles */
+#ingredients-results .ingredients {
+    padding: 2rem;
+    margin: 1rem 0;
+    border: var(--border);
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    font-size: 1.6rem; /* Increased font size */
+}
+
+#ingredients-results .ingredients p {
+    margin: 0.5rem 0;
+    font-size: 1.6rem; /* Increased font size for paragraphs */
+}

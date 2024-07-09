@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+.wrap-content {
+    display: flex;
+}
+
+.board-sign {
+    width: 30%;
+    height: 100vh;
+    background: linear-gradient(125deg, #f17509cb, #e87a0c);
+    color: #ffffff;
+    position: fixed;
+}
+
+.account-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    padding-top: 3em;
+}
+
+.account-block a {
+    display: block;
+    margin-top: 30px;
+    border: 1px solid #ffffff;
+    padding: 1.4rem;
+    width: 160px;
+    outline: none;
+    text-align: center;
+    border-radius: 40px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.account-block a:hover {
+    background-color: #ffffff;
+    color: #222222;
+    text-decoration: underline;
+}
+
+.svg-block img {
+    display: block;
+    width: 350px;
+    margin: 0 auto;
+}
+
+.account-block h2 {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.signup_block {
+    width: 100%;
+    margin-left: 30%;
+}
+
+.container {
+    width: 100%;
+    max-width: 990px;
+    margin: 0 auto;
+    padding: 3em 3em;
+}
+
+.container img {
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+.signup_block h1 {
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+.title-wrap::after {
+    display: block;
+    content: '';
+    width: 80px;
+    height: 3px;
+    background-color: #f28c17;
+}
+
+form {
+    margin-top: 20px;
+}
+
+fieldset {
+    border: 2px #222222 solid;
+    padding: 0.5em 0.5em;
+    margin: 10px 0;
+}
+
+.form-info {
+    font-size: 0.9rem;
+    padding: 0.5em;
+    color: #4284f3;
+}
+
+form fieldset label {
+    display: flex;
+    margin-top: 10px;
+}
+
+form fieldset input, 
+form fieldset select {
+    padding: 0.5em 0.5em;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    font-size: 1rem;
+}
+
+.input {
+    width: 50%;
+}
+
+.input:focus {
+    border: 1px solid #222222;
+}
+
+.select {
+    width: 50%;
+}
+
+.btn {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ffffff;
+    background-color: #f39542;
+    padding: 0.8rem;
+    cursor: pointer;
+    color: #ffffff;
+    outline: none;
+    text-align: center;
+    border-radius: 40px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: linear-gradient(120deg, #f39542, #f39542);
+}

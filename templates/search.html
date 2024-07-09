@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarket Companion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}"> 
+    <!-- <link rel="stylesheet" href="fcss2.css"> -->
+
+    <style>
+        /* Your custom styles here */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Supermarket Companion</h1>
+        <nav class="navbar">
+            <a href="/first">home</a>
+            <a href="/third">Search</a>
+            <a href="/fifth">scan</a>
+            <a href="/fourth">AI Chef</a>
+            <a href="/second">Sign Up</a>
+          <a href="new.html">Features</a>
+        </nav>
+    </header>
+    
+    <main id="main-content">
+        
+
+        <!-- Search Section -->
+        <section id="search-section">
+            <h2>Search Products</h2>
+            <input type="text" id="search-input" placeholder="Search for a product...">
+            <button id="search-btn">Search</button>
+            <div id="search-results"></div>
+            <!-- Add to Cart button in Search Section -->
+        </section>
+
+
+        <!-- Cart Section -->
+        <section id="cart-section">
+            <h2>Cart</h2>
+            <div id="cart-items"></div>
+            <p id="total-price"></p> <!-- Display total price -->
+            <button id="checkout-btn">Checkout</button>
+        </section>
+
+        
+        
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
+    <script>
+        
+        
+
+
+
+$(document).ready(function() {
+$('#add-to-cart-btn').click(function() {
+var productName = $(this).data('product_name');
+var price = $(this).data('price');
+var quantity=$(this).data('quantity')
+addToCart(productName, price ,quantity); // Call addToCart() when "Add to Cart" button is clicked
+});
+
+$('#checkout-btn').click(function() {
+calculateTotalPrice(); // Call checkout() when "Checkout" button is clicked
+});
+});
+$(document).ready(function() {
+            $('#search-btn').click(function() {
+                searchProduct();
+            });
+
+            $('#checkout-btn').click(function() {
+                window.location.href = '/checkout';
+            });
+        });
+
+function calculateTotalPrice() {
+    var totalPrice = 0;
+
+    // Iterate over each scanned item and sum up the prices
+    $('#cart-items p').each(function() {
+            var priceString = $(this).text().split('₹')[1]; // Extract the price part from the text
+            var price = parseFloat(priceString); // Convert the price to a float
+            totalPrice += price; // Add the price to the total
+        });
+    
+
+
+    $('#scanned-items p').each(function() {
+        var priceString = $(this).text().split('₹')[1]; // Extract the price part from the text
+        var price = parseFloat(priceString); // Convert the price to a float
+        totalPrice += price; // Add the price to the total
+    });
+
+    // Display the total price
+    $('#total-price').text('Total Price: ₹' + totalPrice.toFixed(2)); // Display the total price with 2 decimal places
+
+    //alert('Total Price: $' + totalPrice.toFixed(2)); // Display the total price with 2 decimal places
+}
+function addToCart(productName, price, quantity, lactoseIntolerant, nutAllergic, vegan) {
+            $.ajax({
+                type: 'POST',
+                url: '/add_to_cart',
+                contentType: 'application/json',
+                data: JSON.stringify({ 
+                    product_name: productName, 
+                    price: price, 
+                    quantity: quantity,
+                    lactose_intolerant: lactoseIntolerant,
+                    nut_allergic: nutAllergic,
+                    vegan: vegan
+                }),
+                success: function(response) {
+                    console.log('Add to Cart Response:', response);
+                    updateCartDisplay(response.product_name, response.price, response.quantity);
+
+                    if (response.lactose_intolerant === 'yes') {
+                        alert('This product is not suitable for lactose intolerant individuals.');
+                    }
+                    if (response.nut_allergic === 'yes') {
+                        alert('This product contains nuts.');
+                    }
+                    if (response.vegan === 'yes') {
+                        alert('This product is suitable for vegans.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error adding item to cart:', error);
+                }
+            });
+        }
+
+
+$(document).ready(function() {
+            $('#search-btn').click(function() {
+                searchProduct();
+            });
+
+            $('#add-to-cart-search-btn').click(function() {
+                var productName = $(this).data('product_name');
+                var price = $(this).data('price');
+                var quantity = $(this).data('quantity');
+                addToCart(productName, price, quantity); // Call addToCart() when "Add to Cart" button is clicked
+            });
+        });
+
+
+        function searchProduct() {
+            var query = $('#search-input').val().trim();
+            if (query !== '') {
+                $.ajax({
+                    type: 'GET',
+                    url: '/search',
+                    data: { q: query },
+                    success: function(response) {
+                        displaySearchResults(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error searching for product:', error);
+                    }
+                });
+            }
+        }
+
+
+
+        function displaySearchResults(results) {
+            var searchResultsContainer = $('#search-results');
+            searchResultsContainer.empty();
+
+            if (results.length > 0) {
+                var resultList = '<ul>';
+                results.forEach(function(result) {
+                    resultList += '<li>' + result.product_name + ' - ₹' + result.price + ' <button class="add-to-cart-search-btn" data-product_name="' + result.product_name + '" data-price="' + result.price + '" data-quantity="' + result.quantity + '" data-lactose_intolerant="' + result.lactose_intolerant + '" data-nut_allergic="' + result.nut_allergic + '" data-vegan="' + result.vegan + '">Add to Cart</button></li>';
+                });
+                resultList += '</ul>';
+                searchResultsContainer.html(resultList);
+            } else {
+                searchResultsContainer.html('<p>No results found.</p>');
+            }
+
+            $('.add-to-cart-search-btn').click(function() {
+                var productName = $(this).data('product_name');
+                var price = $(this).data('price');
+                var quantity = $(this).data('quantity');
+                var lactoseIntolerant = $(this).data('lactose_intolerant');
+                var nutAllergic = $(this).data('nut_allergic');
+                var vegan = $(this).data('vegan');
+                addToCart(productName, price, quantity, lactoseIntolerant, nutAllergic, vegan);
+            });
+        }
+
+        function updateCartDisplay(productName, price, quantity) {
+            var existingItem = $('#cart-items').find(`p:contains(${productName})`);
+
+            if (existingItem.length > 0) {
+                var currentQuantity = parseInt(existingItem.text().match(/Quantity: (\d+)/)[1]);
+                var currentPrice = parseFloat(existingItem.text().match(/Price: ₹(\d+(\.\d+)?)/)[1]);
+                var newQuantity = currentQuantity + quantity;
+                var newPrice = currentPrice + (price * quantity);
+
+                existingItem.text(`Product Name: ${productName}, Price: ₹${newPrice.toFixed(2)}, Quantity: ${newQuantity}`);
+            } else {
+                var itemHTML = `<p>Product Name: ${productName}, Price: ₹${(price * quantity).toFixed(2)}, Quantity: ${quantity}</p>`;
+                $('#cart-items').append(itemHTML);
+            }
+        }
+
+    </script>
+</body>
+</html>
